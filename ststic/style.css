@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 2rem;
+    background: #f8f8f8;
+}
+h1, h2 {
+    color: #333;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    margin-bottom: 8px;
+    background: #fff;
+    padding: 8px;
+    border-radius: 4px;
+}
+a {
+    color: #1c5980;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+form input, form button {
+    padding: 6px;
+    margin-top: 10px;
+}

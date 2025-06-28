@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #2c3e50;
+            margin: 0;
+            padding: 30px 20px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1 {
+            text-align: center;
+            color: #34495e;
+            margin-bottom: 40px;
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 3px solid #2980b9;
+            padding-bottom: 8px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            background-color: #fff;
+            padding: 14px 20px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            font-size: 1.1rem;
+            transition: background-color 0.25s ease;
+        }
+        li:hover {
+            background-color: #eaf3fc;
+        }
+        a {
+            display: inline-block;
+            margin-top: 50px;
+            text-decoration: none;
+            background-color: #2980b9;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #1c5c9a;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+
+    <h2>Users</h2>
+    <ul>
+        {% for user in users %}
+            <li>{{ user.username }} - {{ user.email }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Books</h2>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }} by {{ book.author }} - {% if book.available %}Available{% else %}Borrowed{% endif %}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Transactions</h2>
+    <ul>
+        {% for t in transactions %}
+            <li>{{ t.user.username }} borrowed {{ t.book.title }} at {{ t.borrowed_at }} 
+                {% if t.returned_at %}- returned at {{ t.returned_at }}{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'book_list' %}">Back to Books</a>
+</body>
+</html>

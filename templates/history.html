@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Borrowing History</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafb;
+            color: #2c3e50;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #34495e;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        li {
+            background-color: #fff;
+            border-radius: 6px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        a {
+            text-decoration: none;
+            background-color: #2980b9;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #1c5980;
+        }
+        /* For text on left side inside li */
+        li > span {
+            flex-grow: 1;
+        }
+        /* Back to Books link styling */
+        .back-link {
+            display: block;
+            width: max-content;
+            margin: 30px auto 0;
+            padding: 12px 28px;
+            background-color: #2980b9;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .back-link:hover {
+            background-color: #1c5980;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Borrowing History</h1>
+    <ul>
+        {% for t in transactions %}
+            <li>
+                <span>{{ t.book.title }} - borrowed at {{ t.borrowed_at }}
+                    {% if t.returned_at %}
+                        - returned at {{ t.returned_at }}
+                    {% endif %}
+                </span>
+                {% if not t.returned_at %}
+                    <a href="{% url 'return_book' t.id %}">Return</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    <a class="back-link" href="{% url 'book_list' %}">Back to Books</a>
+</body>
+</html>
