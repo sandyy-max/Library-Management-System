@@ -1,84 +1,127 @@
-# Library Management System
 
-A Django-based web application for managing library resources, books, and user borrowing activities.
+# 📚 Library Management System
 
-## Features
-
-- User registration, login, and authentication
-- Admin dashboard for managing users, books, and transactions
-- Add, edit, and delete books
-- Borrow and return books with transaction tracking
-- View borrowing history per user
-- Filter and search books by title, author, or genre
-
-## Folder Structure
-
-The main app is `Home`, which contains:
-- `models.py`: Database models for books and transactions
-- `views.py`: Core logic and view functions
-- `urls.py`: URL routing for the app
-- `templates/`: HTML templates for rendering pages
-- `admin.py`: Django admin site configuration
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.x
-- Django (install with `pip install django`)
-
-### Setup
-
-1. **Clone the repository**
-    ```bash
-    git clone https://github.com/sandyy-max/Library-Management-System.git
-    cd Library-Management-System
-    ```
-
-2. **Install dependencies**
-    ```bash
-    pip install django
-    ```
-
-3. **Apply migrations**
-    ```bash
-    python manage.py makemigrations
-    python manage.py migrate
-    ```
-
-4. **Create a superuser (for admin access)**
-    ```bash
-    python manage.py createsuperuser
-    ```
-
-5. **Run the server**
-    ```bash
-    python manage.py runserver
-    ```
-
-6. **Visit in browser**
-    - User interface: [http://localhost:8000/books/](http://localhost:8000/books/)
-    - Admin dashboard: [http://localhost:8000/admin-dashboard/](http://localhost:8000/admin-dashboard/)
-    - Django admin: [http://localhost:8000/admin/](http://localhost:8000/admin/)
-
-## Usage
-
-- Register as a new user or login if you already have an account.
-- Browse available books, borrow and return books.
-- View your borrowing history.
-- Admin users can add/edit/delete books and manage users.
-
-## Possible Improvements
-
-- Add book cover images and more metadata
-- Email notifications for due dates and reminders
-- Fine calculation for late returns
-- REST API endpoints for integration
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
+A Django-based web application designed to manage library resources with user authentication, book catalog, and issue/return features.
 
 ---
 
-*For any questions or feedback, please open an issue or pull request.*
+## 🚀 Features
+
+- ✅ User Registration & Login
+- 📖 View Book Catalog
+- 📦 Book Issue & Return Functionality
+- 🔐 Role-based Dashboards (User/Admin)
+- 🎨 Responsive UI with Pastel and White Theme
+
+---
+
+## 🛠️ Technologies Used
+
+- **Backend**: Django (Python)
+- **Frontend**: HTML, CSS, Bootstrap
+- **Database**: SQLite3
+- **Authentication**: Django User Model
+
+---
+
+## 📂 Project Structure
+
+```
+Library-Management-System/
+├── Home/
+│   ├── migrations/
+│   ├── static/
+│   │   ├── css/
+│   │   └── js/
+│   ├── templates/
+│   │   ├── login.html
+│   │   ├── signup.html
+│   │   └── dashboard.html
+│   ├── models.py
+│   ├── views.py
+│   └── urls.py
+├── LibraryManagementSystem/
+│   ├── settings.py
+│   └── urls.py
+├── db.sqlite3
+├── manage.py
+└── README.md
+```
+
+---
+
+## 👤 User Roles
+
+- **Admin**: Add/Edit/Delete Books, Manage Users, View Logs
+- **User**: View Books, Issue/Return Books
+
+---
+
+## 🔐 Authentication Flow
+
+1. Register at `/signup/`
+2. Login at `/login/`
+3. Redirected to a user or admin dashboard
+
+---
+
+## 🧩 Models Overview
+
+```python
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=100)
+    quantity = models.IntegerField()
+```
+
+```python
+class Issue(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    issue_date = models.DateField(auto_now_add=True)
+    return_date = models.DateField(null=True, blank=True)
+```
+
+---
+
+## 🖼️ Screenshots
+
+> Add screenshots in a folder called `/screenshots` and display them like:
+
+```md
+![Login Page](screenshots/login.png)
+![Dashboard](screenshots/dashboard.png)
+```
+
+---
+
+## 🛠️ Setup Instructions
+
+```bash
+git clone https://github.com/sandyy-max/Library-Management-System.git
+cd Library-Management-System
+python -m venv env
+source env/bin/activate  # Windows: env\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+---
+
+## 🌱 Future Enhancements
+
+- 🔎 Search/Sort Books
+- 📧 Email Notifications for Due Books
+- 👤 User Profile Pages
+- 📊 Admin Dashboard Analytics
+
+---
+
+## 📄 License
+
+Licensed under the MIT License.
+
+---
+
+> Created with ❤️ by Sandhya
